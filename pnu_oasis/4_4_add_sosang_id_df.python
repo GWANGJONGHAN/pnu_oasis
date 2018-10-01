@@ -1,0 +1,304 @@
+import os
+import pandas as pd
+from math import sin, cos, sqrt, atan2, radians
+
+sosang = pd.read_csv('C:\\Users\\Han\\oasis\\180823\\data\\busan_sosang.csv',sep=',',encoding='utf-8')
+df = pd.read_csv('C:\\Users\\Han\\oasis\\180823\\data\\4_df_cctv_prior_parking_building_utf8.csv',sep=',',encoding='utf-8')
+D14_1=list(df['building_18']); Q12_1=list(df['building_18']); D05_1=list(df['building_18']); D21_1=list(df['building_18']); 
+D07_1=list(df['building_18']); L01_1=list(df['building_18']); D03_1=list(df['building_18']); N08_1=list(df['building_18']); 
+R05_1=list(df['building_18']); F15_1=list(df['building_18']); Q01_1=list(df['building_18']); O02_1=list(df['building_18']);
+S02_1=list(df['building_18']); Q04_1=list(df['building_18']); F01_1=list(df['building_18']); Q06_1=list(df['building_18']); 
+Q03_1=list(df['building_18']); Q07_1=list(df['building_18']); Q08_1=list(df['building_18']); Q02_1=list(df['building_18']);
+Q09_1=list(df['building_18']); N01_1=list(df['building_18']); D02_1=list(df['building_18']); D25_1=list(df['building_18']); 
+S01_1=list(df['building_18']); D06_1=list(df['building_18']); D18_1=list(df['building_18']); S03_1=list(df['building_18']);
+D23_1=list(df['building_18']); R07_1=list(df['building_18']); R10_1=list(df['building_18']); F02_1=list(df['building_18']); 
+R04_1=list(df['building_18']); D10_1=list(df['building_18']); Q05_1=list(df['building_18']); D15_1=list(df['building_18']);
+N02_1=list(df['building_18']); R08_1=list(df['building_18']); F03_1=list(df['building_18']); F14_1=list(df['building_18']); 
+D16_1=list(df['building_18']); F17_1=list(df['building_18']); F11_1=list(df['building_18']); F16_1=list(df['building_18']); 
+F06_1=list(df['building_18']); D24_1=list(df['building_18']); D26_1=list(df['building_18']); F09_1=list(df['building_18']); 
+Q14_1=list(df['building_18']); D22_1=list(df['building_18']); R13_1=list(df['building_18']); F12_1=list(df['building_18']); 
+R03_1=list(df['building_18']); D01_1=list(df['building_18']); N05_1=list(df['building_18']); D09_1=list(df['building_18']); 
+F04_1=list(df['building_18']); F13_1=list(df['building_18']); F05_1=list(df['building_18']); D12_1=list(df['building_18']); 
+D13_1=list(df['building_18']); D04_1=list(df['building_18']); D08_1=list(df['building_18']); R01_1=list(df['building_18']);
+F08_1=list(df['building_18']); D20_1=list(df['building_18']); N03_1=list(df['building_18']); S04_1=list(df['building_18']); 
+R09_1=list(df['building_18']); D17_1=list(df['building_18']); F18_1=list(df['building_18']); F07_1=list(df['building_18']);
+L03_1=list(df['building_18']); Q10_1=list(df['building_18']); Q15_1=list(df['building_18']); Q13_1=list(df['building_18']); 
+O01_1=list(df['building_18']); F20_1=list(df['building_18']); R06_1=list(df['building_18']); R02_1=list(df['building_18']);
+D19_1=list(df['building_18']); D11_1=list(df['building_18']); O03_1=list(df['building_18']); S07_1=list(df['building_18']); 
+O05_1=list(df['building_18']); F19_1=list(df['building_18']); L04_1=list(df['building_18']); N04_1=list(df['building_18']); 
+N07_1=list(df['building_18']); L05_1=list(df['building_18']); O04_1=list(df['building_18']); P02_1=list(df['building_18']); 
+P03_1=list(df['building_18']); P01_1=list(df['building_18']);
+
+code = list(sosang['상권업종중분류코드'])
+s_lat = list(sosang['위도'])
+s_lon = list(sosang['경도'])
+df_lat = list(df['latitude'])
+df_lon = list(df['longitude'])
+
+def distance(lat1, lon1, lat2, lon2):
+    R = 6371
+    x = (lon2 - lon1) * cos( 0.5*(lat2+lat1) )
+    y = lat2 - lat1
+    d = R * sqrt( x*x + y*y )
+    return(d)
+
+for i in range(len(df_lat)):
+    print(i)
+    for j in range(len(s_lat)):
+        temp = distance(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+        
+        if temp <= 2.0  and code[j]=='D14':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D14_1[i] = D14_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q12':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q12_1[i] = Q12_1[i] +1
+        elif temp <= 2.0  and code[j]=='D05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D05_1[i] = D05_1[i] +1
+        elif temp <= 2.0  and code[j]=='D21':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D21_1[i] = D21_1[i] +1
+        elif temp <= 2.0  and code[j]=='D07':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D07_1[i] = D07_1[i] +1
+        elif temp <= 2.0  and code[j]=='L01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            L01_1[i] = L01_1[i] +1
+        elif temp <= 2.0  and code[j]=='D03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D03_1[i] = D03_1[i] +1
+        elif temp <= 2.0  and code[j]=='N08':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            N08_1[i] = N08_1[i] +1
+        elif temp <= 2.0  and code[j]=='R05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R05_1[i] = R05_1[i] +1
+        elif temp <= 2.0  and code[j]=='F15':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F15_1[i] = F15_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q01_1[i] = Q01_1[i] +1
+        elif temp <= 2.0  and code[j]=='O02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            O02_1[i] = O02_1[i] +1
+        elif temp <= 2.0  and code[j]=='S02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            S02_1[i] = S02_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q04_1[i] = Q04_1[i] +1
+        elif temp <= 2.0  and code[j]=='F01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F01_1[i] = F01_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q06':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q06_1[i] = Q06_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q03_1[i] = Q03_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q08':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q08_1[i] = Q08_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q02_1[i] = Q02_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q09':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q09_1[i] = Q09_1[i] +1
+        elif temp <= 2.0  and code[j]=='N01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            N01_1[i] = N01_1[i] +1
+        elif temp <= 2.0  and code[j]=='D02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D02_1[i] = D02_1[i] +1
+        elif temp <= 2.0  and code[j]=='D25':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D25_1[i] = D25_1[i] +1
+        elif temp <= 2.0  and code[j]=='S01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            S01_1[i] = S01_1[i] +1
+        elif temp <= 2.0  and code[j]=='D06':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D06_1[i] = D06_1[i] +1
+        elif temp <= 2.0  and code[j]=='D18':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D18_1[i] = D18_1[i] +1
+        elif temp <= 2.0  and code[j]=='S03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            S03_1[i] = S03_1[i] +1
+        elif temp <= 2.0  and code[j]=='D23':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D23_1[i] = D23_1[i] +1
+        elif temp <= 2.0  and code[j]=='R07':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R07_1[i] = R07_1[i] +1
+        elif temp <= 2.0  and code[j]=='R10':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R10_1[i] = R10_1[i] +1
+        elif temp <= 2.0  and code[j]=='R04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R04_1[i] = R04_1[i] +1
+        elif temp <= 2.0  and code[j]=='D10':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D10_1[i] = D10_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q05_1[i] = Q05_1[i] +1
+        elif temp <= 2.0  and code[j]=='D15':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D15_1[i] = D15_1[i] +1
+        elif temp <= 2.0  and code[j]=='N02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            N02_1[i] = N02_1[i] +1
+        elif temp <= 2.0  and code[j]=='R08':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R08_1[i] = R08_1[i] +1
+        elif temp <= 2.0  and code[j]=='F03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F03_1[i] = F03_1[i] +1
+        elif temp <= 2.0  and code[j]=='F14':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F14_1[i] = F14_1[i] +1
+        elif temp <= 2.0  and code[j]=='D16':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D16_1[i] = D16_1[i] +1
+        elif temp <= 2.0  and code[j]=='F17':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F17_1[i] = F17_1[i] +1
+        elif temp <= 2.0  and code[j]=='F11':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F11_1[i] = F11_1[i] +1
+        elif temp <= 2.0  and code[j]=='F16':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F16_1[i] = F16_1[i] +1
+        elif temp <= 2.0  and code[j]=='F06':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F06_1[i] = F06_1[i] +1
+        elif temp <= 2.0  and code[j]=='D24':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D24_1[i] = D24_1[i] +1
+        elif temp <= 2.0  and code[j]=='D26':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D26_1[i] = D26_1[i] +1
+        elif temp <= 2.0  and code[j]=='F09':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F09_1[i] = F09_1[i] +1
+        elif temp <= 2.0  and code[j]=='Q14':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            Q14_1[i] = Q14_1[i] +1
+        elif temp <= 2.0  and code[j]=='D22':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D22_1[i] = D22_1[i] +1
+        elif temp <= 2.0  and code[j]=='R13':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R13_1[i] = R13_1[i] +1
+        elif temp <= 2.0  and code[j]=='F12':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F12_1[i] = F12_1[i] +1
+        elif temp <= 2.0  and code[j]=='R03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R03_1[i] = R03_1[i] +1
+        elif temp <= 2.0  and code[j]=='D01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D01_1[i] = D01_1[i] +1
+        elif temp <= 2.0  and code[j]=='N05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            N05_1[i] = N05_1[i] +1
+        elif temp <= 2.0  and code[j]=='D09':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D09_1[i] = D09_1[i] +1
+        elif temp <= 2.0  and code[j]=='F04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F04_1[i] = F04_1[i] +1
+        elif temp <= 2.0  and code[j]=='F13':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F13_1[i] = F13_1[i] +1
+        elif temp <= 2.0  and code[j]=='F05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F05_1[i] = F05_1[i] +1
+        elif temp <= 2.0  and code[j]=='D12':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D12_1[i] = D12_1[i] +1
+        elif temp <= 2.0  and code[j]=='D13':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D13_1[i] = D13_1[i] +1
+        elif temp <= 2.0  and code[j]=='D04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D04_1[i] = D04_1[i] +1
+        elif temp <= 2.0  and code[j]=='D08':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D08_1[i] = D08_1[i] +1
+        elif temp <= 2.0  and code[j]=='R01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R01_1[i] = R01_1[i] +1
+        elif temp <= 2.0  and code[j]=='F08':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F08_1[i] = F08_1[i] +1
+        elif temp <= 2.0  and code[j]=='D20':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D20_1[i] = D20_1[i] +1
+        elif temp <= 2.0  and code[j]=='N03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            N03_1[i] = N03_1[i] +1
+        elif temp <= 2.0  and code[j]=='S04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            S04_1[i] = S04_1[i] +1
+        elif temp <= 2.0  and code[j]=='R09':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R09_1[i] = R09_1[i] +1
+        elif temp <= 2.0  and code[j]=='D17':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D17_1[i] = D17_1[i] +1
+        elif temp <= 2.0  and code[j]=='F18':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F18_1[i] = F18_1[i] +1
+        elif temp <= 2.0  and code[j]=='F07':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F07_1[i] = F07_1[i] +1
+        elif temp <= 2.0  and code[j]=='R06':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R06_1[i] = R06_1[i] +1
+        elif temp <= 2.0  and code[j]=='R02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            R02_1[i] = R02_1[i] +1
+        elif temp <= 2.0  and code[j]=='D19':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D19_1[i] = D19_1[i] +1
+        elif temp <= 2.0  and code[j]=='D11':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            D11_1[i] = D11_1[i] +1
+        elif temp <= 2.0  and code[j]=='O03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            O03_1[i] = O03_1[i] +1
+        elif temp <= 2.0  and code[j]=='S07':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            S07_1[i] = S07_1[i] +1
+        elif temp <= 2.0  and code[j]=='O05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            O05_1[i] = O05_1[i] +1
+        elif temp <= 2.0  and code[j]=='F19':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            F19_1[i] = F19_1[i] +1
+        elif temp <= 2.0  and code[j]=='L04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            L04_1[i] = L04_1[i] +1
+        elif temp <= 2.0  and code[j]=='N07':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            N07_1[i] = N07_1[i] +1
+        elif temp <= 2.0  and code[j]=='L05':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            L05_1[i] = L05_1[i] +1
+        elif temp <= 2.0  and code[j]=='O04':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            O04_1[i] = O04_1[i] +1
+        elif temp <= 2.0  and code[j]=='P02':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            P02_1[i] = P02_1[i] +1
+        elif temp <= 2.0  and code[j]=='P03':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            P03_1[i] = P03_1[i] +1
+        elif temp <= 2.0  and code[j]=='P01':
+            print(df_lat[i], df_lon[i], s_lat[j], s_lon[j])
+            P01_1[i] = P01_1[i] +1
